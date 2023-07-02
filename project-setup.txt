@@ -1,0 +1,135 @@
+
+8. add cors
+
+////////////////////////////////
+
+yarn add cors
+yarn add -D @types/cors
+import cors from 'cors'
+app.use(express.json())
+
+app.use(express.urlencoded({extended: true}))
+
+
+///////////////////////////////////
+
+9. typescript eslint prettier setup
+https://blog.logrocket.com/linting-typescript-eslint-prettier/
+
+# ts config.json er root e boshate hobe
+
+"include": ["src"], // which files to compile
+"exclude": ["node_modules"], // which files to skip
+
+# yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+
+# make file .eslintrc and paste it 
+
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    // to enforce using type for object type definitions, can be type or interface 
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"], 
+  },
+
+  "env": {
+    "browser": true,
+    "es2021": true
+  }
+}
+
+##  add this line in package.json script
+"lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts ."
+
+## .eslintignore
+dist
+node_modules
+.env
+
+##  "lint:fix": "eslint . --fix",
+    "prettier:fix": "prettier --write .",
+
+10. prettier setup
+
+yarn add -D prettier
+
+## .prettierrc
+{
+    "semi": false, 
+    "singleQuote": true, 
+    "arrowParens": "avoid"
+  }
+
+  ## scrip e likhbo tahole pera kom 
+//////////////////////////////////////////
+emni bujhar jonno rough korsi 
+
+   yarn prettier --write src/app.ts
+  shob gula file e korte chai tai eivabe likhbo
+   yarn prettier --write .
+   /////////////////////////////////////////
+  **  eivabe likhbo scrip e likhbo tahole pera kom
+  "prettier:check": "yarn prettier --write ."
+    "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
+
+## settings.json e 
+{
+     "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+}
+
+## Avoiding conflicts when working with ESLint and Prettier
+
+yarn add -D eslint-config-prettier
+
+## // .eslintrc
+
+ {
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+  },
+  "plugins": ["@typescript-eslint"],
+  // HERE
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+  },
+
+  "env": {
+    "browser": true,
+    "es2021": true
+  }
+}
+
+
+## husky install
+
+yarn add husky --dev
+yarn husky install
+# creat precomit hook
+yarn husky add .husky/pre-commit "npm test"
+
+## pre-commit er bhitoore
+yarn lint-staged
+
+add script 
+"lint-prettier": "yarn lint:check && yarn prettier:check",
+
+##  lint staged install
+yarn add -D lint-staged
+## multiple commands in a sequnce
+  "lint-staged":{
+ "src/**/*.ts": "yarn lint-prettier"
+  },
