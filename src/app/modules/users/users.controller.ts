@@ -82,10 +82,31 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
+
+const getMyProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.headers.authorization
+
+    const result = await UserService.getMyProfile(token)
+
+    res.status(200).json({
+      success: true,
+      message: ' profile get successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  getMyProfile,
 }
