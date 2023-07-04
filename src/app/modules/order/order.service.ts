@@ -80,6 +80,13 @@ const createOrder = async (order: IOrder) => {
   return orderData
 }
 
+const getOrder = async (id: string): Promise<IOrder | null> => {
+  const data = await Order.findById(id)
+
+  return data
+}
+
 export const OrderService = {
   createOrder,
+  getOrder,
 }

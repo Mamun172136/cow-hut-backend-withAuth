@@ -20,11 +20,11 @@ const getOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id
     console.log(req.body)
-    const result = await OrderService.createOrder(id)
+    const result = await OrderService.getOrder(id)
 
     res.status(200).json({
       success: true,
-      message: ' order created successfully',
+      message: ' order get successfully',
       data: result,
     })
   } catch (error) {
