@@ -11,17 +11,17 @@ router.post(
   AuthController.loginAdmin
 )
 
-// router.post(
-//   '/auth/login',
-//   validateRequest(AuthValidation.loginZodSchema),
-//   AuthController.loginUser
-// )
+router.post(
+  '/auth/login',
+  validateRequest(AuthValidation.loginZodSchema),
+  AuthController.loginUser
+)
 
 // //////// refresh token
 
-// router.post(
-//   '/auth/refresh-token',
-//   validateRequest(AuthValidation.refreshTokenZodSchema),
-//   AuthController.refreshToken
-// )
+router.post(
+  '/auth/refresh-token',
+  validateRequest(AuthValidation.refreshTokenZodSchema),
+  AuthController.refreshToken
+)
 export const AuthRoutes = router
