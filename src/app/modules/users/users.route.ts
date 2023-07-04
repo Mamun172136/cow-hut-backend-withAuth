@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/auth/signup', UserController.createUser)
 router.get('/users', auth(ENUM_USER_ROLE.SELLER), UserController.getAllUsers)
 
-router.get('/users/my-profile', UserController.getSingleUser)
+router.get('/users/my-profile', UserController.getMyProfile)
 router.get('/users/:id', UserController.getSingleUser)
 
 router.patch('/users/update-profile', UserController.updateUser)

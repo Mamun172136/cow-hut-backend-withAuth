@@ -95,7 +95,7 @@ const getMyProfile = async (
 
     res.status(200).json({
       success: true,
-      message: ' profile get successfully',
+      message: ' users information retrived successfully',
       data: result,
     })
   } catch (error) {
