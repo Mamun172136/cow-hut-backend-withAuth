@@ -1,15 +1,15 @@
-// import { z } from 'zod'
+import { z } from 'zod'
 
-// const loginZodSchema = z.object({
-//   body: z.object({
-//     password: z.string({
-//       required_error: 'password is required',
-//     }),
-//     phoneNumber: z.string({
-//       required_error: 'phone is required',
-//     }),
-//   }),
-// })
+const loginZodSchema = z.object({
+  body: z.object({
+    password: z.string({
+      required_error: 'password is required',
+    }),
+    phoneNumber: z.string({
+      required_error: 'phone is required',
+    }),
+  }),
+})
 
 // const refreshTokenZodSchema = z.object({
 //   cookies: z.object({
@@ -19,7 +19,7 @@
 //   }),
 // })
 
-// export const AuthValidation = {
-//   loginZodSchema,
-//   refreshTokenZodSchema,
-// }
+export const AuthValidation = {
+  loginZodSchema,
+  refreshTokenZodSchema,
+}
