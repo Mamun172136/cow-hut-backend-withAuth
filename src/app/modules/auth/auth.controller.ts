@@ -25,32 +25,32 @@ const loginAdmin = async (req: Request, res: Response, next: NextFunction) => {
     next(error)
   }
 }
-// const loginUser = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const { ...loginData } = req.body
-//     console.log(req.body)
-//     const result = await AuthService.loginUser(loginData)
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { ...loginData } = req.body
+    console.log(req.body)
+    const result = await AuthService.loginUser(loginData)
 
-//     const cookieOptions = {
-//       secure: config.env === 'production',
-//       httpOnly: true,
-//     }
+    const cookieOptions = {
+      secure: config.env === 'production',
+      httpOnly: true,
+    }
 
-//     res.cookie('refreshToken', result.refreshToken, cookieOptions)
+    res.cookie('refreshToken', result.refreshToken, cookieOptions)
 
-//     // delete result.refreshToken
+    // delete result.refreshToken
 
-//     res.status(200).json({
-//       success: true,
-//       message: ' user login  successfully',
-//       data: result.accessToken,
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
+    res.status(200).json({
+      success: true,
+      message: ' user login  successfully',
+      data: result.accessToken,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
-// //////// refresh token
+//////// refresh token
 
 // const refreshToken = async (
 //   req: Request,
