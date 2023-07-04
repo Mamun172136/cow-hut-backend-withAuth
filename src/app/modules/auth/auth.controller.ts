@@ -52,32 +52,32 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
 
 //////// refresh token
 
-// const refreshToken = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { refreshToken } = req.cookies
+const refreshToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { refreshToken } = req.cookies
 
-//     const result = await AuthService.refreshToken(refreshToken)
+    const result = await AuthService.refreshToken(refreshToken)
 
-//     const cookieOptions = {
-//       secure: config.env === 'production',
-//       httpOnly: true,
-//     }
+    const cookieOptions = {
+      secure: config.env === 'production',
+      httpOnly: true,
+    }
 
-//     res.cookie('refreshToken', refreshToken, cookieOptions)
+    res.cookie('refreshToken', refreshToken, cookieOptions)
 
-//     res.status(200).json({
-//       success: true,
-//       message: ' user login  successfully',
-//       data: result,
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
+    res.status(200).json({
+      success: true,
+      message: ' user login  successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 export const AuthController = {
   loginAdmin,
