@@ -24,6 +24,7 @@ const adminSchema = new Schema<IAdmin>(
       required: true,
     },
     address: { type: String },
+    needsPasswordChange: { type: Boolean, default: true },
   },
   {
     timestamps: true,

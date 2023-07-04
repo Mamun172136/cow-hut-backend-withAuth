@@ -17,6 +17,9 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('token from get all users controller', req.headers.authorization)
+  console.log('role from get all users controller:', req.user)
+
   try {
     const result = await UserService.getAllUsers()
 

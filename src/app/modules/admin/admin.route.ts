@@ -2,6 +2,6 @@ import express from 'express'
 import { AdminController } from './admin.controller'
 const router = express.Router()
 
-router.post('/auth/signup', AdminController.createAdmin)
+router.post('/admins/create-admin', AdminController.createAdmin)
 
-export const UserRoutes = router
+export const AdminRoutes = router

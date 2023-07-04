@@ -13,4 +13,5 @@ export type IUser = {
   address?: string
   budget?: number
   income?: number
+  needsPasswordChange: true | false
 }

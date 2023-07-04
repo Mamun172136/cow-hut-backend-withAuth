@@ -9,4 +9,5 @@ export type IAdmin = {
   password: string
   name: AdminName
   address?: string
+  needsPasswordChange: true | false
 }

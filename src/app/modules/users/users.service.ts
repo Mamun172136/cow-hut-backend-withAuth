@@ -1,9 +1,17 @@
 import ApiError from '../../../errors/ApiError'
+import hashPassword from '../../hashPassword/hash.password'
 import { IUser } from './users.interface'
 import { User } from './users.model'
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
-  const createdUser = await User.create(user)
+  const hashedPassword = await hashPassword(user.password)
+
+  // Create a new admin object with the updated password
+  const newUser: IUser = {
+    ...user,
+    password: hashedPassword,
+  }
+  const createdUser = await User.create(newUser)
   if (!createdUser) {
     throw new ApiError(400, 'failed to created user bhaiiiii')
   }

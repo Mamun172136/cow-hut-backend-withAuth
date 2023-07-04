@@ -27,12 +27,11 @@ const userSchema = new Schema<IUser>(
     address: { type: String },
     budget: { type: Number },
     income: { type: Number },
+    needsPasswordChange: { type: Boolean, default: true },
   },
+
   {
     timestamps: true,
-    toJSON: {
-      virtuals: true,
-    },
   }
 )
 
