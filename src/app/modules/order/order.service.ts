@@ -7,7 +7,7 @@ import { IOrder } from './order.interface'
 import { User } from '../users/users.model'
 import { Cow } from '../cows/cows.model'
 import { Order } from './order.model'
-
+import jwt from 'jsonwebtoken'
 // : Promise<IOrder | null>
 
 const createOrder = async (order: IOrder) => {
@@ -80,10 +80,39 @@ const createOrder = async (order: IOrder) => {
   return orderData
 }
 
-const getOrder = async (id: string): Promise<IOrder | null> => {
-  const data = await Order.findById(id)
+const getOrder = async (id: string, token: string) => {
+  if (!token) {
+    throw new ApiError(401, 'You are not authorized')
+  }
 
-  return data
+  let verifiedToken = null
+
+  try {
+    verifiedToken = jwt.verify(token, 'secret')
+    console.log('decoded:', verifiedToken)
+  } catch (error) {
+    throw new ApiError(403, 'invalid  token')
+  }
+
+  console.log('verified user', verifiedToken)
+  const data = await Order.findById(id).populate('buyer').populate('cow')
+
+  console.log('data from order service', data)
+
+  if (verifiedToken.role === 'buyer') {
+    if (data?.buyer._id == verifiedToken.id) {
+      console.log('buyer can see  only his orders ')
+      return data
+    }
+  } else if (verifiedToken.role === 'seller') {
+    if (data?.cow.seller == verifiedToken.id) {
+      console.log('seller can see only his orders')
+      return data
+    }
+  } else if (verifiedToken.role === 'admin') {
+    console.log('admin can see all orders')
+    return data
+  }
 }
 
 export const OrderService = {
