@@ -1,6 +1,8 @@
 
 # DIGITAL COW HUT AUTH BACKEND
 
+## live link <a href="https://cow-hut-admin-with-auth-rho.vercel.app/" target="_blank">Live Link</a>
+
 ## MAIN PART
 
 ## AUTH(USER) :
