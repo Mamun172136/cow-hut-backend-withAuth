@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SortOrder } from 'mongoose'
 import ApiError from '../../../errors/ApiError'
 import { IGenericResponse } from '../../../interfaces/common'
 import { IpaginationOptions } from '../../../interfaces/pagination'
 import { paginationHelpers } from '../../helpers/paginationHelper'
-
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { ICow } from './cows.interface'
 import { Cow } from './cows.model'
 
@@ -85,19 +86,73 @@ const getAllCows = async (
   }
 }
 const getSingleCow = async (id: string): Promise<ICow | null> => {
-  const data = await Cow.findById(id)
+  const data = await Cow.findById(id).populate('seller')
 
   return data
 }
 const updateCow = async (
   id: string,
-  payload: Partial<ICow>
+  payload: Partial<ICow>,
+  token: string
 ): Promise<ICow | null> => {
-  const data = await Cow.findOneAndUpdate({ _id: id }, payload, { new: true })
+  if (!token) {
+    throw new ApiError(401, 'You are not authorized')
+  }
 
+  let verifiedToken = null
+  try {
+    verifiedToken = jwt.verify(token, 'secret')
+    console.log('decoded:', verifiedToken)
+  } catch (error) {
+    throw new ApiError(403, 'invalid  token')
+  }
+
+  console.log('verified user', verifiedToken)
+  const sellerOfCow = await Cow.findById(id).populate('seller')
+
+  console.log('data from user service for updateCow', sellerOfCow)
+
+  if (!sellerOfCow) {
+    throw new ApiError(400, 'cow not found ')
+  }
+  console.log('data from user service for updateCow', sellerOfCow)
+
+  if ((verifiedToken as JwtPayload).id != sellerOfCow?.seller?._id) {
+    throw new ApiError(400, ' this seller is not woner of this cow ')
+  }
+
+  const data = await Cow.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  }).populate('seller')
   return data
 }
-const deleteCow = async (id: string): Promise<ICow | null> => {
+
+const deleteCow = async (id: string, token: string): Promise<ICow | null> => {
+  if (!token) {
+    throw new ApiError(401, 'You are not authorized')
+  }
+
+  let verifiedToken = null
+  try {
+    verifiedToken = jwt.verify(token, 'secret')
+    console.log('decoded:', verifiedToken)
+  } catch (error) {
+    throw new ApiError(403, 'invalid  token')
+  }
+
+  console.log('verified user', verifiedToken)
+  const sellerOfCow = await Cow.findById(id).populate('seller').lean().exec()
+  console.log('data from user service for updateCow', sellerOfCow)
+
+  if (!sellerOfCow) {
+    throw new ApiError(400, 'cow not found ')
+  }
+  console.log('data from user service for updateCow', sellerOfCow)
+
+  if ((verifiedToken as JwtPayload).id != sellerOfCow.seller._id) {
+    throw new ApiError(400, ' this seller is not woner of this cow ')
+  }
+
   const data = await Cow.findByIdAndDelete({ _id: id })
 
   return data

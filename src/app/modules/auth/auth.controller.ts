@@ -19,7 +19,8 @@ const loginAdmin = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json({
       success: true,
       message: ' admin login  successfully',
-      data: result.accessToken,
+      // data: result.accessToken,
+      data: { accessToken: result.accessToken },
     })
   } catch (error) {
     next(error)
@@ -43,7 +44,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json({
       success: true,
       message: ' user login  successfully',
-      data: result.accessToken,
+      data: { accessToken: result.accessToken },
     })
   } catch (error) {
     next(error)

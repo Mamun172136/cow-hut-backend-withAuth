@@ -8,9 +8,11 @@ type UserModel = Model<IUser, object>
 // 2. Create a Schema corresponding to the document interface.
 const userSchema = new Schema<IUser>(
   {
+    id: { type: Schema.Types.ObjectId },
+    // _id: { type: Schema.Types.ObjectId },
     phoneNumber: { type: String, required: true, unique: true },
     role: { type: String, required: true, enum: userRole },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: 0 },
     name: {
       type: {
         firstName: {
@@ -25,13 +27,16 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     address: { type: String },
-    budget: { type: Number },
-    income: { type: Number },
-    needsPasswordChange: { type: Boolean, default: true },
+    budget: { type: Number, required: true },
+    income: { type: Number, required: true },
+    // needsPasswordChange: { type: Boolean, default: true },
   },
 
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
   }
 )
 

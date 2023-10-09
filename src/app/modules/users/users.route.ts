@@ -5,14 +5,26 @@ import { ENUM_USER_ROLE } from '../../enums/user'
 const router = express.Router()
 
 router.post('/auth/signup', UserController.createUser)
-router.get('/users', auth(ENUM_USER_ROLE.SELLER), UserController.getAllUsers)
+router.get('/users', auth(ENUM_USER_ROLE.ADMIN), UserController.getAllUsers)
 
 router.get('/users/my-profile', UserController.getMyProfile)
-router.get('/users/:id', UserController.getSingleUser)
+router.get(
+  '/users/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  UserController.getSingleUser
+)
 
-router.patch('/users/update-profile', UserController.updateUser)
-router.patch('/users/:id', UserController.updateUser)
+router.patch('/users/my-profile', UserController.updateMyProfile)
+router.patch(
+  '/users/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  UserController.updateUser
+)
 
-router.delete('/users/:id', UserController.deleteUser)
+router.delete(
+  '/users/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  UserController.deleteUser
+)
 
 export const UserRoutes = router

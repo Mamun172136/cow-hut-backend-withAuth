@@ -4,5 +4,12 @@ import { ICow } from '../cows/cows.interface'
 
 export type IOrder = {
   buyer: Types.ObjectId | IUser
-  cow: Types.ObjectId | ICow
+  //   cow: Types.ObjectId | ICow
+  //   seller?: Types.ObjectId | IUser
+  cow:
+    | {
+        _id: Types.ObjectId
+        seller: Types.ObjectId | IUser
+      }
+    | ICow
 }

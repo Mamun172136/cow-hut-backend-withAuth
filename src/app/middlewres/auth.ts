@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import ApiError from '../../errors/ApiError'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 const auth =
   (...requiredRoles: string[]) =>
@@ -16,7 +16,7 @@ const auth =
       // verify token
       let verifiedToken = null
       try {
-        verifiedToken = jwt.verify(token, 'secret')
+        verifiedToken = jwt.verify(token, 'secret') as JwtPayload
         console.log('decoded:', verifiedToken)
       } catch (error) {
         throw new ApiError(403, 'invalid  token')
@@ -25,7 +25,10 @@ const auth =
       req.user = verifiedToken // role , id
 
       // role diye guard korar jnno
-      if (requiredRoles.length && !requiredRoles.includes(verifiedToken.role)) {
+      if (
+        requiredRoles.length &&
+        !requiredRoles.includes((verifiedToken as JwtPayload).role)
+      ) {
         throw new ApiError(403, 'Forbidden role ')
       }
 

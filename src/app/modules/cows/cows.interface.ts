@@ -28,6 +28,6 @@ export type ICow = {
   weight: number
   label: Ilabel
   category: Icategory
-
+  // seller: Types.ObjectId | IUser
   seller: Types.ObjectId | IUser
 }

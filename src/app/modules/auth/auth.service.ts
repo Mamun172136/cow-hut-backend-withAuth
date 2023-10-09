@@ -8,7 +8,7 @@ import {
   ILoginUserResponse,
   IRefreshTokenResponse,
 } from './auth.interface'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import { jwtHelpers } from '../../helpers/jwtHelpers'
 import { User } from '../users/users.model'
 import { Types } from 'mongoose'
@@ -64,13 +64,13 @@ const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   console.log({
     accessToken,
     refreshToken,
-    needsPasswordChange: isUserExist.needsPasswordChange,
+    // needsPasswordChange: isUserExist.needsPasswordChange,
   })
 
   return {
     accessToken,
     refreshToken,
-    needsPasswordChange: isUserExist.needsPasswordChange,
+    // needsPasswordChange: isUserExist.needsPasswordChange,
   }
 }
 
@@ -126,13 +126,13 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   console.log({
     accessToken,
     refreshToken,
-    needsPasswordChange: isUserExist.needsPasswordChange,
+    // needsPasswordChange: isUserExist.needsPasswordChange,
   })
 
   return {
     accessToken,
     refreshToken,
-    needsPasswordChange: isUserExist.needsPasswordChange,
+    // needsPasswordChange: isUserExist.needsPasswordChange,
   }
 }
 
@@ -154,7 +154,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   // tumi delete hye gso  kintu tumar refresh token ase
   // checking deleted user's refresh token
 
-  const objectId = new Types.ObjectId(verifiedToken.id)
+  const objectId = new Types.ObjectId((verifiedToken as JwtPayload).id)
 
   const isUserExist = await User.findOne(
     { _id: objectId },

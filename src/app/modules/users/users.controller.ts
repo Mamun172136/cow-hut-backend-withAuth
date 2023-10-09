@@ -91,7 +91,7 @@ const getMyProfile = async (
   try {
     const token = req.headers.authorization
 
-    const result = await UserService.getMyProfile(token)
+    const result = await UserService.getMyProfile(token as string)
 
     res.status(200).json({
       success: true,
@@ -102,6 +102,27 @@ const getMyProfile = async (
     next(error)
   }
 }
+
+const updateMyProfile = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.headers.authorization
+    const payload = req.body
+    const result = await UserService.updateMyProfile(token as string, payload)
+
+    res.status(200).json({
+      success: true,
+      message: ' users information updated successfully from updateMyprodile',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const UserController = {
   createUser,
   getAllUsers,
@@ -109,4 +130,5 @@ export const UserController = {
   updateUser,
   deleteUser,
   getMyProfile,
+  updateMyProfile,
 }

@@ -67,8 +67,9 @@ const getSingleCow = async (
 const updateCow = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id
+    const token = req.headers.authorization
     const updatedData = req.body
-    const result = await CowService.updateCow(id, updatedData)
+    const result = await CowService.updateCow(id, updatedData, token as string)
 
     res.status(200).json({
       success: true,
@@ -82,8 +83,9 @@ const updateCow = async (req: Request, res: Response, next: NextFunction) => {
 const deleteCow = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id
+    const token = req.headers.authorization
 
-    const result = await CowService.deleteCow(id)
+    const result = await CowService.deleteCow(id, token as string)
 
     res.status(200).json({
       success: true,
