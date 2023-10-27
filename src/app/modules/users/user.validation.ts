@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const updateStudentZodSchema = z.object({
+const updateUserZodSchema = z.object({
   body: z.object({
     name: z.object({
       firstName: z.string().optional(),
@@ -17,7 +17,25 @@ const updateStudentZodSchema = z.object({
     needsPasswordChange: z.boolean().optional(),
   }),
 })
+const userZodSchema = z.object({
+  body: z.object({
+    name: z.object({
+      firstName: z.string(),
+      lastName: z.string(),
+      middleName: z.string(),
+    }),
 
-export const StudentValidaion = {
-  updateStudentZodSchema,
+    phoneNumber: z.string(),
+    role: z.string(),
+    password: z.string(),
+    address: z.string(),
+    budget: z.number(),
+    income: z.number(),
+    needsPasswordChange: z.boolean(),
+  }),
+})
+
+export const UserValidaion = {
+  updateUserZodSchema,
+  userZodSchema,
 }

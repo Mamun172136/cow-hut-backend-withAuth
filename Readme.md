@@ -1,27 +1,57 @@
 
+# DIGITAL COW HUT AUTH BACKEND
 
-# Digital Cow Hut
+## MAIN PART
 
-# <a href="https://digital-cow-hut-backend-chi.vercel.app/" target="_blank">Deployment Link</a>
+## AUTH(USER) :
+## http://localhost:5000/api/v1/auth/login POST
 
-### user route
-##### api/v1/auth/signup (POST)
-##### api/v1/users (GET)
-##### api/v1/users/6177a5b87d32123f08d2f5d4 (Single GET) Include an id that is saved in your database
-##### api/v1/users/6177a5b87d32123f08d2f5d4 (PATCH)
-##### api/v1/users/6177a5b87d32123f08d2f5d4 (DELETE) Include an id that is saved in your database
+## http://localhost:5000/api/v1/auth/signup POST
 
-### cow route
-##### api/v1/cows (POST)
-##### api/v1/cows (GET)
-##### api/v1/cows/6177a5b87d32123f08d2f5d4 (Single GET) Include an id that is saved in your database
-##### api/v1/cows/6177a5b87d32123f08d2f5d4 (PATCH)
-##### api/v1/cows/6177a5b87d32123f08d2f5d4 (DELETE) Include an id that is saved in your database
+## http://localhost:5000/api/v1/auth/refresh-token (POST)
 
-### searchTer filtering pagination sorting
-##### api/v1/cows?pag=1&limit=10
-##### api/v1/cows?sortBy=price&sortOrder=asc
-##### api/v1/cows?minPrice=20000&maxPrice=70000
-##### api/v1/cows?location=Chattogram
-##### api/v1/cows?searchTerm=Cha
+## AUTH(ADMIN)
+## http://localhost:5000/api/v1/admins/create-admin POST
+
+## http://localhost:5000/api/v1/admin/login POST
+
+## USER
+## http://localhost:5000/api/v1/users  all get
+
+## http://localhost:5000/api/v1/users/64a2c341464a0c05b3552ada  single get
+
+## http://localhost:5000/api/v1/users/64a2c341464a0c05b3552ada  patch
+
+## http://localhost:5000/api/v1/users/64a2c341464a0c05b3552ada  delete
+
+## cows
+
+## http://localhost:5000/api/v1/cows/ post
+
+## http://localhost:5000/api/v1/cows/64a2ed27119967e78f22c103  get single
+
+## http://localhost:5000/api/v1/cows  all get
+
+## http://localhost:5000/api/v1/cows/64a2ed27119967e78f22c103  patch
+
+## http://localhost:5000/api/v1/cows/64a2ed27119967e78f22c103 delete
+
+## orders
+
+## http://localhost:5000/api/v1/orders/ post
+
+## http://localhost:5000/api/v1/orders/64a336eaaaff6636bfa5fcd0  get
+
+## Bonus PART
+## my profile
+
+## http://localhost:5000/api/v1/users/my-profile
+
+## http://localhost:5000/api/v1/users/my-profile patch
+
+## http://localhost:5000/api/v1/orders/64a336eaaaff6636bfa5fcd0  get
+
+
+
+
 

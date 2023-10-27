@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/cows', auth(ENUM_USER_ROLE.SELLER), CowController.createCow)
 
 router.get(
-  '/cows/',
+  '/cows',
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
   CowController.getAllCows
 )
