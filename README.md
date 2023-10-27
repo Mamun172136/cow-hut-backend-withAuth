@@ -1,6 +1,8 @@
 
 # DIGITAL COW HUT AUTH BACKEND
 
+## live link <a href="https://cow-hut-admin-with-auth-rho.vercel.app/" target="_blank">Live Link</a>
+
 ## MAIN PART
 
 ## AUTH(USER) :
@@ -39,6 +41,7 @@
 ## orders
 
 ## http://localhost:5000/api/v1/orders/ post
+## http://localhost:5000/api/v1/orders    get
 
 ## http://localhost:5000/api/v1/orders/64a336eaaaff6636bfa5fcd0  get
 
